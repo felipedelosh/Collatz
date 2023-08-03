@@ -54,8 +54,7 @@ class Software:
             print("Eroorr")
 
     def updateView(self):
-        _type = "point"
-        self.controller.paintRoute(_type, self.canvas)
+        self.controller.paintRoute(self._comboBoxTypeView.get(), self.canvas)
         self.lblOutput['text'] = self.controller.output
 
 
