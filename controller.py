@@ -94,5 +94,7 @@ class Controller:
                 y0 = _kdy + (_totalY - (_totalY*(i/maxY))) 
                 x1 = x0 + 4
                 y1 = y0 + 4
+                if len(self._steps) < 20:
+                    canvas.create_text(x0, y0-5, text=str(i), fill=self.defaultColor['axes'], tags="point")
                 canvas.create_oval(x0, y0, x1, y1, fill=self.defaultColor['axes'], tags="point")
                 counter = counter + 1
