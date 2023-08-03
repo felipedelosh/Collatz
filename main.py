@@ -5,7 +5,6 @@ FelipdelosH
 Representates in axis X step to aplicate form / Y eN  
 
 """
-
 from tkinter import *
 from tkinter import ttk
 from controller import *
@@ -24,7 +23,7 @@ class Software:
         self.lblOutput = Label(self.canvas, text=self.controller.output)
         self._comboBoxTypeView = StringVar()
         self.ttkComboBoxTypeView = ttk.Combobox(self.canvas, state='readonly', textvariable=self._comboBoxTypeView)
-        self.ttkComboBoxTypeView['values'] = ['point']
+        self.ttkComboBoxTypeView['values'] = self.controller._typesOfGraphics
         self.paintAndShow()
 
 

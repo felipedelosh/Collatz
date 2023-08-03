@@ -11,6 +11,7 @@ class Controller:
         self.limitInfinite = 1000
         self._steps = [] # Save in vector f(x) mouves
         self.LOGS = ""
+        self._typesOfGraphics = ['point', 'line']
         self.output = "TEST"
         self.defaultColor = {'bg':"black", 'fg':"red", 'visible':"green", 'axes':"blue"}
 
@@ -46,15 +47,19 @@ class Controller:
         Enter a Tkinter canvas and paint via type:
         types examples: "point"
         """
+        self.deletePreviousGraphics(canvas)
         if type == "point":
             self._paintPointRoute(canvas)
 
+        if type == "line":
+            self._paintLineRoute(canvas)
+
+        
 
     def _paintPointRoute(self, canvas):
         """
         Enter a canvas and create XY point graphics
         """
-        canvas.delete("point")
         _h = int(canvas['height'])
         _w = int(canvas['width'])
 
@@ -98,3 +103,61 @@ class Controller:
                     canvas.create_text(x0, y0-5, text=str(i), fill=self.defaultColor['axes'], tags="point")
                 canvas.create_oval(x0, y0, x1, y1, fill=self.defaultColor['axes'], tags="point")
                 counter = counter + 1
+
+
+    def _paintLineRoute(self, canvas):
+        """
+        Enter a canvas and create XY line graphics
+        """
+        _h = int(canvas['height'])
+        _w = int(canvas['width'])
+
+        # Get the max number of axes y
+        maxY = 0
+        for i in self._steps:
+            if i > maxY:
+                maxY = i
+
+    
+        # Paint Axis
+        # Y
+        _kdy = _h*0.1
+        canvas.create_line(_w*0.05, _kdy, _w*0.05, _h*0.9, fill=self.defaultColor['axes'], tags="line")
+        # Put labels min-middle-max
+        canvas.create_text(_w*0.03, _h*0.88, text="0", fill=self.defaultColor['axes'], tags="line")
+        canvas.create_text(_w*0.03, _h*0.44, text=str(maxY/2), fill=self.defaultColor['axes'], tags="line")
+        canvas.create_text(_w*0.03, _kdy, text=str(maxY), fill=self.defaultColor['axes'], tags="line")
+    
+
+        # X
+        _k = _w*0.05
+        canvas.create_line(_k, _h*0.9, _w*0.94, _h*0.9, fill=self.defaultColor['axes'], tags="line")
+
+        # Total Aixis Y
+        _totalY = _h - (_kdy) - (_h*0.1)
+
+        # Total Axis X 
+        counterSteps = len(self._steps)
+        if counterSteps > 0:
+            _totalX = _w - (_k) - (_w*0.08) # How long is X axis?
+            _dx = _totalX / len(self._steps) # X0 and X1 equal distance for all points
+            # Paint Points
+            counter = 0
+            for i in range(0, counterSteps):
+                try:
+                    x0 = _k + (_dx*counter)
+                    y0 = _kdy + (_totalY - (_totalY*(self._steps[i]/maxY)))
+                    x1 =  _k + (_dx*(counter+1))
+                    y1 = _kdy + (_totalY - (_totalY*(self._steps[i+1]/maxY)))
+                    canvas.create_line(x0, y0, x1, y1, fill=self.defaultColor['axes'], tags="line")
+                except:
+                    pass
+                counter = counter + 1
+
+
+
+    def deletePreviousGraphics(self, canvas):
+        for i in self._typesOfGraphics:
+            canvas.delete(i)
+
+    
