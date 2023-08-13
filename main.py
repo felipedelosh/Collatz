@@ -50,7 +50,7 @@ class Software:
             self.controller.ejecuteAlgorithm()
             self.updateView()
         else:
-            print("Eroorr")
+            print("Error not insert a valid number")
 
     def updateView(self):
         self.controller.paintRoute(self._comboBoxTypeView.get(), self.canvas)

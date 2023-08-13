@@ -86,8 +86,8 @@ class Controller:
         canvas.create_line(_w*0.05, _kdy, _w*0.05, _h*0.9, fill=self.defaultColor['axes'], tags="point")
         # Put labels min-middle-max
         canvas.create_text(_w*0.03, _h*0.88, text="0", fill=self.defaultColor['axes'], tags="point")
-        canvas.create_text(_w*0.03, _h*0.44, text=str(maxY/2), fill=self.defaultColor['axes'], tags="point")
-        canvas.create_text(_w*0.03, _kdy, text=str(maxY), fill=self.defaultColor['axes'], tags="point")
+        canvas.create_text(_w*0.03, _h*0.44, text=str(round(maxY/2)), fill=self.defaultColor['axes'], tags="point")
+        canvas.create_text(_w*0.03, _kdy, text=str(round(maxY)), fill=self.defaultColor['axes'], tags="point")
     
 
         # X
@@ -110,7 +110,7 @@ class Controller:
                 x1 = x0 + 4
                 y1 = y0 + 4
                 if len(self._steps) < 20:
-                    canvas.create_text(x0, y0-5, text=str(i), fill=self.defaultColor['text'], tags="point")
+                    canvas.create_text(x0, y0-5, text=str(round(i)), fill=self.defaultColor['text'], tags="point")
                 canvas.create_oval(x0, y0, x1, y1, fill=self.defaultColor['axes'], tags="point")
                 counter = counter + 1
 
@@ -135,8 +135,8 @@ class Controller:
         canvas.create_line(_w*0.05, _kdy, _w*0.05, _h*0.9, fill=self.defaultColor['axes'], tags="line")
         # Put labels min-middle-max
         canvas.create_text(_w*0.03, _h*0.88, text="0", fill=self.defaultColor['axes'], tags="line")
-        canvas.create_text(_w*0.03, _h*0.44, text=str(maxY/2), fill=self.defaultColor['axes'], tags="line")
-        canvas.create_text(_w*0.03, _kdy, text=str(maxY), fill=self.defaultColor['axes'], tags="line")
+        canvas.create_text(_w*0.03, _h*0.44, text=str(round(maxY/2)), fill=self.defaultColor['axes'], tags="line")
+        canvas.create_text(_w*0.03, _kdy, text=str(round(maxY)), fill=self.defaultColor['axes'], tags="line")
     
 
         # X
@@ -161,7 +161,7 @@ class Controller:
                     y1 = _kdy + (_totalY - (_totalY*(self._steps[i+1]/maxY)))
                     canvas.create_line(x0, y0, x1, y1, fill=self.defaultColor['axes'], tags="line")
                     if len(self._steps) < 20:
-                        canvas.create_text(x0, y0-5, text=str(self._steps[i]), fill=self.defaultColor['text'], tags="point")
+                        canvas.create_text(x0, y0-5, text=str(round(self._steps[i])), fill=self.defaultColor['text'], tags="point")
                 except:
                     pass
                 counter = counter + 1
@@ -194,7 +194,7 @@ class Controller:
 
     def _paintPairs(self, canvas):
         """
-        
+        Paint a graphic with Pair VS Unpair numbers
         """
         _h = int(canvas['height'])
         _w = int(canvas['width'])
@@ -206,7 +206,10 @@ class Controller:
         # Put labels 
         canvas.create_text(_w*0.03, _h*0.70, text="pairs", fill=self.defaultColor['pair'], tags="pairs")
         canvas.create_text(_w*0.03, _h*0.35, text="unpairs", fill=self.defaultColor['unpair'], tags="pairs")
-    
+        canvas.create_text(_w*0.05, _h*0.90, text="0%", fill=self.defaultColor['visible'], tags="pairs")
+        canvas.create_text(_w*0.45, _h*0.90, text="50%", fill=self.defaultColor['visible'], tags="pairs")
+        canvas.create_text(_w*0.9, _h*0.90, text="100%", fill=self.defaultColor['visible'], tags="pairs")
+
         # X
         _k = _w*0.05
         canvas.create_line(_k, _h*0.9, _w*0.94, _h*0.9, fill=self.defaultColor['axes'], tags="pairs")
