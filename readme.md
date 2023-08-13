@@ -1,18 +1,24 @@
 # FelipedelosH
+![BANNER](Docs/banner.png)
 
-In this time i see with my eyes what happend with:
+In this time i see with my eyes what happend with (3x+1).
+The logic is simple:
+getme a integer number, the number is bigger than 0.
+and hav 2 rules if the number is pair you divide for 2 and the number is unpair multiply for 3 and plus 1. Iterate and always end in 4>2>1.
 
-numbers = [0..N]
-data = X
-step = 0
-for i in numbers:
-    if data==1:
-       print(f"END\n Steps:{step}")
-       break
-    if data%2==0:
-       data = data / 2
-    else:
-       data = (data*3)+1
+## Interface Function
 
-    step = step + 1
-       
+![Interface](Docs/interface.png)
+
+1 -> Enter the number to examinate.
+2 -> Select a Graphic type
+3 -> Show the graphic
+4 -> Area to show the graphic
+
+## Distribution of Pair and Unpair
+
+![PairsVSUnpairs](Docs/pairs.png)
+
+The trick is: "The most part of numbers forces to be pair"
+and divide reduces a number so many times than grow multiply 3.
+The algorithm forces a number to fall in 4>2>1
